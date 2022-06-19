@@ -7,12 +7,16 @@ const router = express.Router();
 
 router.post("/join", authController.join);
 router.post("/login", authController.login);
+router.get("/logout", authController.logout);
+router.post("/reset", authController.reset);
+router.post("/reset/update", authController.update);
 
 router.get("/kakao/callback", passport.authenticate("kakao", {
   failureRedirect: "/",
 }), (req, res) => {
-  res.redirect("/");
+  res.redirect("/success");
 });
+
 router.post("/kakao/:kind", (req, res, next) => {
   const kind = req.params.kind;
   switch (kind) {

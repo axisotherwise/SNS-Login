@@ -4,9 +4,10 @@ import { sequelize } from "./index.js";
 export default class User extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      name: {
-        type: Sequelize.STRING(10),
+      email: {
+        type: Sequelize.STRING(70),
         allowNull: true,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING(200),
@@ -20,6 +21,14 @@ export default class User extends Sequelize.Model {
         type: Sequelize.STRING(10),
         allowNull: true,
         defaultValue: "local",
+      },
+      resetToken: {
+        type: Sequelize.STRING(200),
+        allowNull: true,
+      },
+      resetTokenExpiration: {
+        type: Sequelize.DATE,
+        allowNull: true,
       },
     }, {
       sequelize,

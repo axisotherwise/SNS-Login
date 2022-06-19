@@ -107,12 +107,14 @@ left: 450px;
       <img src="/images/naver.png" alt="naver" class="naverlogin">
       <img src="/images/google.png" alt="google" class="googlelogin">
     </div>
-    <form id="login" action="/auth/kakao/kaka" method="post" class="input-group">
+    <form id="login" action="/auth/kakao/kakao" method="post" class="input-group">
       <input type="text" class="input-field" placeholder="User Email">
       <input type="password" class="input-field" placeholder="Enter Password">
       <input type="checkbox" class="checkbox"><span>Remember Password</span>
+      <input type="hidden" name="_csrf" value="{{ csrfToken }}">
       <button class="submit">Login</button>
     </form>
+    <a href="/reset">비번 뭐였지?</a>
   </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

@@ -8,10 +8,6 @@ export default class Info extends Sequelize.Model {
         type: Sequelize.STRING(3),
         allowNull: true,
       },
-      email: {
-        type: Sequelize.STRING(50),
-        allowNull: true,
-      },
       married: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
