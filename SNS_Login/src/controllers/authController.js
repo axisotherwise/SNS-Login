@@ -81,16 +81,19 @@ const logout = async (req, res, next) => {
 const reset = async (req, res, next) => {
   try {
     // const link = await crypto.randomBytes(10).toString("hex");
-    const promise = Promise.resolve(crypto.randomBytes(32).toString("hex"));
     // const user = await User.findOne({ where: { email: req.body.email }});
+    const promise = Promise.resolve(crypto.randomBytes(32).toString("hex"));
     const promise2 = Promise.resolve(User.findOne({ where: { email: req.body.email }}));
     const promises = [promise, promise2];
     await Promise.allSettled(promises)
       .then((result) => {
-        result.map(e => {
-          console.log(e);
+        const link = result[0].value;
+        const user = result[1].value;
+        user.update({
+          resetToken: link,
+          resetTokenExpiration: Date.now() + 3600000,
         });
-        res.end();
+        passwordResetMail(req.body.email, link, res);
       })
       .catch((err) => {
         console.error(err);
