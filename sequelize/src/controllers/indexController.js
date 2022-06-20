@@ -26,7 +26,7 @@ const pageReset2 = async (req, res, next) => {
     console.log(link);
     const user = await User.findOne({ where: { 
       resetToken: link,
-      resetTokenExpiration: { [Op.gt]: Date.now() },
+      resetTokenExpiration: { [Op.lte]: Date.now() },
     }});
     const userId = JSON.stringify(user);
     const result = JSON.parse(userId);
